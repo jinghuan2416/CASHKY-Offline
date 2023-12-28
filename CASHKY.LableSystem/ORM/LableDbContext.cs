@@ -1,4 +1,5 @@
 ﻿using CASHKY.LableSystem.ProductLable;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace CASHKY.LableSystem.ORM
 {
-   public class LableDbContent:DbContext
+    public class LableDbContent : DbContext
     {
+        static SqliteConnectionStringBuilder builder;
+        static LableDbContent()
+        {
+            builder = new SqliteConnectionStringBuilder
+            {
+                DataSource = System.IO.Path.Combine( "Database", "Lable.db")
+            };
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -19,7 +28,8 @@ namespace CASHKY.LableSystem.ORM
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite("data source=lable.db");
+
+            optionsBuilder.UseSqlite(builder.ConnectionString);
         }
     }
 }

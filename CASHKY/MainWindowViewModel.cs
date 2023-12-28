@@ -14,10 +14,10 @@ namespace CASHKY
         public MainWindowViewModel(IServiceProvider serviceProvider)
         {
             NavItems.Add(new NavItem("文件"));
-            NavItems.Add(new NavItem("标签") { Type = typeof(CASHKY.LableSystem.ProductLable.ProductLableView) });
+            NavItems.Add(new NavItem("标签", typeof(CASHKY.LableSystem.ProductLable.ProductLableView)));
             NavItems.Add(new NavItem("纱线"));
-            NavItems.Last().NavItems.Add(new NavItem("类型"));
-            NavItems.Last().NavItems.Add(new NavItem("入库"));
+            NavItems.Last().NavItems.Add(new NavItem("类型", typeof(CASHKY.YarnSystem.YarnCategory.YarnCategoryView)));
+            NavItems.Last().NavItems.Add(new NavItem("入库", typeof(CASHKY.YarnSystem.YarnWarehousing.YarnWarehousingView)));
             this.serviceProvider = serviceProvider;
         }
 

@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CASHKY.LableSystem\CASHKY.LableSystem.csproj" />
+    <ProjectReference Include="..\CASHKY.YarnSystem\CASHKY.YarnSystem.csproj" />
   </ItemGroup>
 
 </Project>

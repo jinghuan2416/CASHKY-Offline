@@ -1,4 +1,5 @@
 ﻿using CASHKY.LableSystem;
+using CASHKY.YarnSystem;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Data;
@@ -18,6 +19,7 @@ namespace CASHKY
             serviceDescriptors.AddScoped<MainWindow>();
             serviceDescriptors.AddScoped<MainWindowViewModel>();
             serviceDescriptors.AddLableServices();
+            serviceDescriptors.AddYarnServices();
             serviceProvider = serviceDescriptors.BuildServiceProvider();
             this.Startup += App_Startup;
         }

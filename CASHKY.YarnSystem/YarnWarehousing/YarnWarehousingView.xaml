@@ -1,0 +1,201 @@
+﻿<UserControl
+    x:Class="CASHKY.YarnSystem.YarnWarehousing.YarnWarehousingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:CASHKY.YarnSystem.YarnWarehousing"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=local:YarnWarehousingViewModel}"
+    mc:Ignorable="d">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox
+                    Margin="5"
+                    Content="纱线"
+                    IsChecked="{Binding SearchYarnWarehousing.IsYarnCategoryId}" />
+                <ComboBox
+                    Width="150"
+                    Margin="5"
+                    DisplayMemberPath="Value"
+                    IsEnabled="{Binding SearchYarnWarehousing.IsYarnCategoryId}"
+                    ItemsSource="{Binding YarnCategories}"
+                    SelectedValue="{Binding SearchYarnWarehousing.YarnCategoryId}"
+                    SelectedValuePath="Key" />
+                <CheckBox
+                    Margin="5"
+                    Content="色号"
+                    IsChecked="{Binding SearchYarnWarehousing.IsColor}" />
+                <TextBox
+                    Width="150"
+                    Margin="5"
+                    IsEnabled="{Binding SearchYarnWarehousing.IsColor}"
+                    Text="{Binding SearchYarnWarehousing.Color}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox
+                    Margin="5"
+                    Content="日期"
+                    IsChecked="{Binding SearchYarnWarehousing.IsDate}" />
+                <TextBlock
+                    Margin="5"
+                    VerticalAlignment="Center"
+                    Text="开始日期" />
+                <DatePicker
+                    Width="150"
+                    Margin="5"
+                    IsEnabled="{Binding SearchYarnWarehousing.IsDate}"
+                    SelectedDate="{Binding SearchYarnWarehousing.StartDate}" />
+                <TextBlock
+                    Margin="5"
+                    VerticalAlignment="Center"
+                    Text="结束日期" />
+                <DatePicker
+                    Width="150"
+                    Margin="5"
+                    IsEnabled="{Binding SearchYarnWarehousing.IsDate}"
+                    SelectedDate="{Binding SearchYarnWarehousing.EndDate}" />
+                <Button
+                    Margin="5"
+                    Command="{Binding SearchCommand}"
+                    Content="搜索" />
+                <Button
+                    Margin="5"
+                    Command="{Binding ResetCommand}"
+                    Content="重置" />
+            </StackPanel>
+        </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock VerticalAlignment="Center" Text="{Binding Count, StringFormat=当前总共记录：{0}条数据}" />
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        ItemsSource="{Binding PageSizes}"
+                        SelectedItem="{Binding SelectPageSize}" />
+                    <hc:Pagination
+                        Margin="5"
+                        IsJumpEnabled="True"
+                        MaxPageCount="{Binding TotalPage}"
+                        PageIndex="{Binding CurrentPage, Mode=TwoWay}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <DockPanel Width="250" DockPanel.Dock="Right">
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button
+                    Margin="5"
+                    Command="{Binding AddCommand}"
+                    Content="新增" />
+                <Button
+                    Margin="5"
+                    Command="{Binding ModifyCommand}"
+                    Content="修改" />
+                <Button
+                    Margin="5"
+                    Command="{Binding DeleteCommand}"
+                    Content="删除" />
+                <Button
+                    Margin="5"
+                    Command="{Binding InitializeDataCommand}"
+                    Content="刷新" />
+            </StackPanel>
+            <ScrollViewer>
+                <Grid VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="纱线" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="色号" />
+                    <TextBlock
+                        Grid.Row="2"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="缸号" />
+                    <TextBlock
+                        Grid.Row="3"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="重量" />
+                    <TextBlock
+                        Grid.Row="4"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="入库日期" />
+                    <TextBlock
+                        Grid.Row="5"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Text="备注" />
+                    <ComboBox
+                        Grid.Column="1"
+                        Margin="5"
+                        DisplayMemberPath="Value"
+                        ItemsSource="{Binding YarnCategories}"
+                        SelectedValue="{Binding InputYarnWarehousing.YarnCategoryId}"
+                        SelectedValuePath="Key" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5"
+                        Text="{Binding InputYarnWarehousing.Color}" />
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="5"
+                        Text="{Binding InputYarnWarehousing.Batch}" />
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="5"
+                        Text="{Binding InputYarnWarehousing.Weight}" />
+                    <DatePicker
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="5"
+                        SelectedDate="{Binding InputYarnWarehousing.InventoryDate}" />
+                    <TextBox
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="5"
+                        Text="{Binding InputYarnWarehousing.Remarks}" />
+                </Grid>
+            </ScrollViewer>
+        </DockPanel>
+        <ListView ItemsSource="{Binding YarnWarehousings}" SelectedItem="{Binding SelectedYarnWarehousing}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="编号" />
+                    <GridViewColumn DisplayMemberBinding="{Binding YarnCategory.Name}" Header="纱线名称" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Color}" Header="色号" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Batch}" Header="缸号" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="重量" />
+                    <GridViewColumn DisplayMemberBinding="{Binding InventoryDate, StringFormat=yyyy-MM-dd}" Header="入库日期" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Remarks}" Header="备注" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</UserControl>
