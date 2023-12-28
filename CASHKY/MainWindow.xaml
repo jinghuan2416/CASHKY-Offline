@@ -1,0 +1,27 @@
+﻿<Window x:Class="CASHKY.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CASHKY"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
+        Title="彩思琪羊绒管理系统" Height="450" Width="800">
+    <Grid>
+        <DockPanel>            
+            <Menu DockPanel.Dock="Top" ItemsSource="{Binding NavItems}">
+                <Menu.ItemContainerStyle>
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemBaseStyle}">
+                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow},Path=DataContext.NavigationCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding Type}"/>
+                    </Style>
+                </Menu.ItemContainerStyle>
+                <Menu.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding NavItems}">
+                        <TextBlock Text="{Binding Title}"/>
+                    </HierarchicalDataTemplate>
+                </Menu.ItemTemplate>
+            </Menu>
+            <ContentControl DockPanel.Dock="Bottom" Content="{Binding Content}"/>
+        </DockPanel>
+    </Grid>
+</Window>
